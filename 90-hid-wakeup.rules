@@ -1,0 +1,5 @@
+# keyboard and mouse are connected to the machine, enable wakeup on its parent device
+# Note: Conditions are *string* match, not numerical. Check your /sys files for the exact string
+
+# Enable wakeup on any keyboard or mouse connected. Keyboards are HID (class 3,protocol 1), mouse are HID (class 3, protocol 2) devices.
+SUBSYSTEM=="usb", ATTRS{bInterfaceClass}=="03", ATTRS{bInterfaceProtocol}=="0[1-2]" RUN+="/bin/sh -c 'echo enabled > /sys$env{DEVPATH}/../power/wakeup'"
